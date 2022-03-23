@@ -54,3 +54,19 @@ button {
     background: rgb(114, 127, 248);
     cursor: pointer;
 }
+
+.img-custom {
+    animation: animate 2s linear;
+}
+@keyframes animate {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    } 
+    100% {
+        opacity: 0;
+        left: 90%;
+    }
+}

@@ -6,11 +6,15 @@ let srcImg =
 
 btn.addEventListener("click", () => {
   let img = document.createElement("img");
+  img.className = "img-custom"
   img.src = srcImg;
   img.style.width = "40px";
   img.style.height = "40px";
   img.style.position = "absolute"
   img.style.left = "0"
-  img.style.left = "0"
+  img.style.marginLeft = "20px"
   nav.append(img)
+  setTimeout(() => {
+    img.remove()
+  }, 2000);
 });
