@@ -1,0 +1,213 @@
+// Sass variable vs css variable => Sass variable put the actual value instead of put var(--everything)
+// Sass variable has 100% compatibility across browsers
+
+// example of variable 
+
+$primary-color : #333;
+$text-color: rgb(243, 231, 231);
+
+
+body {
+    background: $primary-color;
+}
+
+
+// map & example
+
+// we can easily change the value and will see it change of all value across the project instead of we change one by one
+
+$font-weight : (
+    "thin" : 200,
+    "medium" : 500,
+    "bold" : 900
+);
+
+p {
+    font-weight: map-get($font-weight, thin );
+}
+
+
+
+
+
+// nesting
+
+// we shouldn't use nesting < a lot > in big project and we should use class instead
+// &_inner in the below example it means main_inner . in the other word & refer the parent name
+// #{&} means .main .main_inner not just .main_inner (nesting)
+// we use &: for hover,active,focus and etc.
+
+
+.main {
+    width: 80%;
+    margin: 0 auto;
+    #{&}_inner {
+        color: $text-color;
+        span {
+            color: $primary-color;
+            &:hover {
+                color: $text-color;
+            }
+        }
+    }
+}
+
+
+
+// partial 
+
+// with sass we can create partial sass file that contain little snippets of css that you could include in other sass files
+// a partial is simply a sass file named with a leading underscore 
+// so the underscore lets sass know that the file is only a partial and that it should not generate a css file
+// so the compiler is going to ignore those files that begin with an underscore
+// we use @import to import partial files (without underscore & .scss)
+
+@import "resets";
+
+
+
+
+
+// function 
+// function in sass and js are very similar
+
+@function weight($weight-name) {
+    @return map-get($font-weight, $weight-name)
+}
+
+.text-header {
+    font-weight: weight(thin);
+}
+
+// another example
+
+$colors : (
+    "whiteColor" : rgb(196, 187, 187),
+    "darkColor" : rgb(29, 27, 27),
+    "redColor" : rgb(241, 86, 86),
+    "blueColor" : rgb(124, 102, 247)
+);
+
+@function color($color) {
+    @return map-get($colors, $color )
+}
+
+h4 {
+    color: color(blueColor);
+}
+
+
+
+// mixin 
+// we should first create mixin then include it
+// for example we have center flex box property and we don't wan't to repeat it a million time in project
+// so we use mixin
+// we can pass argument in mixin to have more flexible mixin
+// in sass we can use @if and @else like the javaScript
+
+
+@mixin flexCenter($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction
+}
+
+.container {
+    @include flexCenter(row);
+}
+
+
+@mixin theme($light: true) {
+    @if $light {
+        color: #fff;
+    } @else {
+        color: #000;
+    }
+}
+
+.wrapper {
+    @include theme($light : false)
+}
+
+
+// we use @content for media query
+// look at the example below
+
+$mobile-media : 700px;
+
+@mixin mobile {
+    @media (max-width:$mobile-media) {
+        @content;
+    }
+}
+
+.logo {
+    font-size: 30px;
+    @include mobile {
+        font-size: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+// extend
+// in the example below we extend all property in para-1 in para-2
+// now para-2 have the all property of para-1 with 1 property more
+
+.para-1 {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.para-2 {
+    @extend .para-1;
+    margin: 20px;
+}
+
+
+
+
+
+
+
+// operations
+
+// in normal css we use calc() for + - * /
+// but in sass it work without calc()
+//look at the example below
+//notice : in sass operation we couldn't mix types for example : 100% - 200px
+
+
+.footer-text {
+    font-size: 40px - 20px; //20px
+    width: 40% * 2; // 80%
+}
+
+
+
+
+
+// for loop
+// we can use loop like js in sass
+
+@for $i from 1 through 10 {
+    .menu_nav:nth-child(#{$i}) {
+        width: 20% * $i;
+    }
+}
+
+
+
+
+
+
