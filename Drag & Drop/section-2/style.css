@@ -37,8 +37,45 @@ body {
 }
 
 .number {
-    background-color: var(--background-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  height: 60px;
+  width: 60px;
+}
+
+.person-name {
+  margin: 0 20px 0 0;
+}
+
+.draggable-list li.right .person-name {
+  color: #3ae374;
+}
+
+.draggable-list li.wrong .person-name {
+  color: #ff3838;
+}
+
+.draggable-list li.over .draggable {
+  background-color: #eaeaea;
+}
+
+.draggable {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  flex: 1;
+}
+
+.check-btn {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
