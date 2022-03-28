@@ -39,4 +39,18 @@ function createList() {
         listItems.push(listItem);
         draggable_list.appendChild(listItem);
     })
+    addEventListeners()
 }
+
+
+function addEventListeners() {
+  const draggables = document.querySelectorAll(".draggable");
+  const dragListItem = document.querySelectorAll(".draggable-list li");
+  draggables.forEach(ele => {
+    ele.addEventListener("dragstart",dragStart)
+  })
+
+  
+}
+
+
