@@ -14,43 +14,58 @@ const richestPeople = [
   "Mukesh Ambani",
 ];
 
-
-const listItems = []
+const listItems = [];
 
 let dragStartIndex;
 
-createList()
+createList();
 
 function createList() {
-    [...richestPeople]
-    .map(ele => ({value : ele , sort : Math.random()}))
-    .sort((a,b) => a.sort - b.sort)
-    .map(ele => ele.value)
-    .forEach((person,index)=> {
-        const listItem = document.createElement("li")
-        listItem.setAttribute("data-index",index)
-        listItem.innerHTML = `
+  [...richestPeople]
+    .map((ele) => ({ value: ele, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((ele) => ele.value)
+    .forEach((person, index) => {
+      const listItem = document.createElement("li");
+      listItem.setAttribute("data-index", index);
+      listItem.innerHTML = `
         <span class="number">${index + 1}</span>
         <div class="draggable" draggable="true">
           <p class="person-name">${person}</p>
           <i class="fas fa-grip-lines"></i>
         </div>
         `;
-        listItems.push(listItem);
-        draggable_list.appendChild(listItem);
-    })
-    addEventListeners()
+      listItems.push(listItem);
+      draggable_list.appendChild(listItem);
+    });
+  addEventListeners();
 }
 
+function dragStart(e) {
+  dragStartIndex = +this.closest("li").getAttribute("data-index")
+}
+function dragOver() {}
+function drop() {
+  const dragEndIndex =
+}
+function dragEnter() {
+  this.classList.add("over")
+}
+function dragLeave() {
+  this.classList.remove("over");
+}
 
 function addEventListeners() {
   const draggables = document.querySelectorAll(".draggable");
   const dragListItem = document.querySelectorAll(".draggable-list li");
-  draggables.forEach(ele => {
-    ele.addEventListener("dragstart",dragStart)
-  })
+  draggables.forEach((ele) => {
+    ele.addEventListener("dragstart", dragStart);
+  });
 
-  
+  dragListItem.forEach((ele) => {
+    ele.addEventListener("dragover", dragOver);
+    ele.addEventListener("drop", drop);
+    ele.addEventListener("dragenter", dragEnter);
+    ele.addEventListener("dragleave", dragLeave);
+  });
 }
-
-
