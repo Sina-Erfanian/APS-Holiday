@@ -1,5 +1,5 @@
-const draggable_list = document.getElementById("draggable-list");
-const check = document.getElementById("check");
+const draggable_list = document.getElementById("draggable-list"); //ul
+const check = document.getElementById("check"); // button
 
 const richestPeople = [
   "Elon Musk",
@@ -42,17 +42,43 @@ function createList() {
 }
 
 function dragStart(e) {
-  dragStartIndex = +this.closest("li").getAttribute("data-index")
+  dragStartIndex = +this.closest("li").getAttribute("data-index");
 }
-function dragOver() {}
+function dragOver(e) {
+  e.preventDefault();
+}
 function drop() {
-  const dragEndIndex =
+  const dragEndIndex = +this.getAttribute("data-index");
+  swapItem(dragStartIndex, dragEndIndex);
+  this.classList.remove("over");
 }
+
+function swapItem(fromIndex, toIndex) {
+  const itemOne = listItems[fromIndex].querySelector(".draggable");
+  const itemTwo = listItems[toIndex].querySelector(".draggable");
+
+  listItems[fromIndex].appendChild(itemTwo);
+  listItems[toIndex].appendChild(itemOne);
+}
+
 function dragEnter() {
-  this.classList.add("over")
+  this.classList.add("over");
 }
 function dragLeave() {
   this.classList.remove("over");
+}
+
+function checkOrder() {
+  listItems.forEach((listItem, index) => {
+    const personName = listItem.querySelector(".draggable").innerText.trim();
+
+    if (personName !== richestPeople[index]) {
+      listItem.classList.add("wrong");
+    } else {
+      listItem.classList.remove("wrong");
+      listItem.classList.add("right");
+    }
+  });
 }
 
 function addEventListeners() {
@@ -69,3 +95,5 @@ function addEventListeners() {
     ele.addEventListener("dragleave", dragLeave);
   });
 }
+
+check.addEventListener("click", checkOrder);
