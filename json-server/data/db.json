@@ -1,0 +1,30 @@
+{
+  "posts": [
+    {
+      "title": "new vue js coures",
+      "body": "lorem ipsum dolor",
+      "likes": 0,
+      "id": 1
+    },
+    {
+      "title": "react 18",
+      "body": "react 18 is available now",
+      "likes": 0,
+      "id": 2
+    },
+    {
+      "title": "angular in 2022",
+      "body": "some sample text",
+      "likes": 0,
+      "id": 3
+    }
+  ],
+  "polls": [
+    {
+      "id": 1,
+      "quetion": "do you prefer react or vue?",
+      "answerA": "vue",
+      "answerB": "react"
+    }
+  ]
+}
